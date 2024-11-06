@@ -6,6 +6,13 @@ const app = express();
 const API_KEY = 'AIzaSyCdi66otUpYck1xhwNi_p1qBuQtlyT-iHw';
 const PLACE_ID = 'ChIJ4RLEkhAiZ4gRJBcamCDnfM0';
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.creamcitycookeville.com'); // Allow your specific domain
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
 app.get('/api/reviews', async (req, res) => {
     try {
         const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=reviews&key=${API_KEY}`;
