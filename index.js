@@ -6,7 +6,7 @@ const PLACE_ID = 'ChIJ4RLEkhAiZ4gRJBcamCDnfM0';
 
 export default async (req, res) => {
     // Set CORS headers to allow your domain
-    res.setHeader('Access-Control-Allow-Origin', 'https://www.creamcitycookeville.com'); // Your specific domain
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
