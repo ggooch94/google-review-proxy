@@ -1,16 +1,19 @@
+import express from 'express';
 import fetch from 'node-fetch';
 
-// Replace these values with your Google API key and Place ID
-const API_KEY = process.env.API_KEY; // This pulls the API key from the environment
+const app = express();
+
+const API_KEY = process.env.API_KEY;
 const PLACE_ID = process.env.PLACE_ID;
 
-export default async (req, res) => {
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.creamcitycookeville.com'); // Allow your specific domain
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-
+app.get('/api/reviews', async (req, res) => {
     try {
         const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=reviews&key=${API_KEY}`;
         const response = await fetch(url);
@@ -25,9 +28,16 @@ export default async (req, res) => {
             throw new Error('No reviews found in the API response');
         }
 
-        res.status(200).json(data.result.reviews);
+        res.json(data.result.reviews);
     } catch (error) {
         console.error('Error fetching Google reviews:', error);
         res.status(500).json({ error: 'Failed to fetch reviews', message: error.message });
     }
-};
+});
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
+
+export default app;
