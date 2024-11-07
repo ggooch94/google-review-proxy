@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 
 // Replace these values with your Google API key and Place ID
-const API_KEY = 'AIzaSyCdi66otUpYck1xhwNi_p1qBuQtlyT-iHw';
-const PLACE_ID = 'ChIJ4RLEkhAiZ4gRJBcamCDnfM0';
+const API_KEY = process.env.API_KEY; // This pulls the API key from the environment
+const PLACE_ID = process.env.PLACE_ID;
 
 export default async (req, res) => {
     // Set CORS headers to allow your domain
