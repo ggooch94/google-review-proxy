@@ -8,7 +8,12 @@
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
+        "src": "/api/reviews",
+        "headers": {
+        "Access-Control-Allow-Origin": "https://www.creamcitycookeville.com",
+        "Access-Control-Allow-Methods": "GET,OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+      },
         "dest": "/index.js"
       }
     ]

@@ -5,10 +5,6 @@ const API_KEY = process.env.API_KEY; // This pulls the API key from the environm
 const PLACE_ID = process.env.PLACE_ID;
 
 export default async (req, res) => {
-    // Set CORS headers to allow your domain
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     // Handle preflight requests
     if (req.method === 'OPTIONS') {
